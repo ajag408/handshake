@@ -7,8 +7,8 @@ chai.use(chaiHttp);
 
 describe ("Get applications for existing and non-existing job", function(){
    
-    it ("Should get all the Applications for the first job", (done)=>{
-        var job = {id: 1};
+    it ("Should get all the Applications for an existing job", (done)=>{
+        var job = {id:4};
         chai.request(server)
             .post("/applications/get-applicants")
             .send(job)
@@ -35,11 +35,11 @@ describe ("Get applications for existing and non-existing job", function(){
 
 
 
-describe ("Get first company signed up", function(){
+describe ("Get existing company", function(){
    
-    it ("Get first company signed up", (done)=>{
+    it ("Get existing company", (done)=>{
         chai.request(server)
-            .get("/companies/getCompany/1")
+            .get("/companies/getCompany/3")
             .end((err, res) => {
                 res.should.have.status(200);
                 // console.log("Response Body:", res.body);
@@ -69,7 +69,7 @@ describe ("Get all upcoming events", function(){
 describe ("Search jobs", function(){
    
     it ("Search jobs simulator", (done)=>{
-        var search= {search: 'a', loc: 'Mountain View'};
+        var search= {search: 'c', loc: 'Switzerland'};
         chai.request(server)
             .post("/jobs/searchJobs")
             .send(search)
