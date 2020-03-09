@@ -13,6 +13,8 @@ const mysql = require('mysql');
 //   dest: UPLOAD_PATH,
 //   limits: {fileSize: 1000000, files: 5}
 // })
+
+
 const mc = mysql.createConnection({
   host: 'localhost',
   port: '8889',
@@ -22,6 +24,10 @@ const mc = mysql.createConnection({
 });
 
 mc.connect();
+
+
+
+
 
 // Express Route
 const studentRoute = require('../backend/routes/student.route');
@@ -76,3 +82,5 @@ app.use((err, req, res) => {
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
+
+module.exports = app;

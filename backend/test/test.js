@@ -1,0 +1,100 @@
+var assert = require("assert");
+let chai = require("chai");
+let chaiHttp = require("chai-http");
+let server=require("../server.js");
+let should = chai.should();
+chai.use(chaiHttp);
+
+describe ("Get applications for existing and non-existing job", function(){
+   
+    it ("Should get all the Applications for the first job", (done)=>{
+        var job = {id: 1};
+        chai.request(server)
+            .post("/applications/get-applicants")
+            .send(job)
+            .end((err, res) => {
+                res.should.have.status(200);
+                // console.log("Response Body:", res.body);
+                done()
+            })
+     })
+     it ("Should get no Applications for a non-existent job", (done)=>{
+        var job = {id: 1000};
+        chai.request(server)
+            .post("/applications/get-applicants")
+            .send(job)
+            .end((err, res) => {
+                res.should.have.status(200);
+                // console.log("Response Body:", res.body);
+                done()
+            })
+     })
+    
+})
+
+
+
+
+describe ("Get first company signed up", function(){
+   
+    it ("Get first company signed up", (done)=>{
+        chai.request(server)
+            .get("/companies/getCompany/1")
+            .end((err, res) => {
+                res.should.have.status(200);
+                // console.log("Response Body:", res.body);
+                done()
+            })
+     })
+    
+})
+
+
+
+describe ("Get all upcoming events", function(){
+   
+    it ("Get all upcoming events", (done)=>{
+        chai.request(server)
+            .get("/events/get-upcoming-events")
+            .end((err, res) => {
+                res.should.have.status(200);
+                // console.log("Response Body:", res.body);
+                done()
+            })
+     })
+    
+})
+
+
+describe ("Search jobs", function(){
+   
+    it ("Search jobs simulator", (done)=>{
+        var search= {search: 'a', loc: 'Mountain View'};
+        chai.request(server)
+            .post("/jobs/searchJobs")
+            .send(search)
+            .end((err, res) => {
+                res.should.have.status(200);
+                // console.log("Response Body:", res.body);
+                done()
+            })
+     })
+    
+})
+
+
+describe ("Get all students signed up", function(){
+   
+    it ("Get all students signed up", (done)=>{
+        chai.request(server)
+            .get("/students/get-all-students")
+            .end((err, res) => {
+                res.should.have.status(200);
+                // console.log("Response Body:", res.body);
+                done()
+            })
+     })
+    
+})
+
+
